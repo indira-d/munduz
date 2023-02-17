@@ -1,11 +1,11 @@
 import React from 'react'
 import './Header.css'
-import phone from '../../assets/phone_icon.svg'
-import logo from '../../assets/logo.svg'
+import phone from '../../images/phone_icon.svg'
+import logo from '../../images/logo.svg'
 import s from '../../commonStyles.module.css'
-import cart from '../../assets/Group 830.png'
-import category from '../../assets/category.png'
-import search from '../../assets/glass.svg'
+import cart from '../../images/Group 830.png'
+import category from '../../images/category.png'
+import search from '../../images/glass.svg'
 
 
 const Header = () => {
@@ -34,9 +34,7 @@ const Header = () => {
 				</div>
 				<div className='search'>
 					<img src={search} className='search_icon'/>
-					<input type='text' placeholder='Поиск товаров' className='search_input'>
-						
-					</input>
+					<input type='text' placeholder='Поиск товаров' className='search_input'/>
 				</div>
 				<div className='header_items'>
 					<div className='catalogue'>
@@ -50,7 +48,8 @@ const Header = () => {
 				</div>
 			</div>
 			
-			<div className='categories'>
+			
+			<section className='categories'>
 				<button className="category_item">Продукты питания</button>
 				<button className="category_item">Овощи и фрукты</button>
 				<button className="category_item">Молочная продукция</button>
@@ -59,10 +58,9 @@ const Header = () => {
 				<button className="category_item">Сухофрукты</button>
 				<button className="category_item">Напитки</button>
 				<button className="category_item">Полуфабрикаты</button>
-				<button className="category_item" style={{fontSize: '20px'}}>...</button>
-			</div>
-
-		</section>
+				<button className="category_item" style={{fontSize: '20px', width: '50px'}}>...</button>
+			</section>
+			</section>
 	</div>
   )
 }
