@@ -1,0 +1,43 @@
+.all_products{
+	position: absolute;
+	right: 10px;
+	top: 70px;
+	width: 80%;
+}
+
+.admin_table_btn{
+
+	border: none;
+	background: none;
+	outline: none;
+	transition: all 0.5s ease-in;
+	font-size: 12px;
+
+}
+
+.admin_table_btn:hover{
+	scale: 1.2
+}
+
+.table_img{
+	width: 50px;
+	height: 50px;
+	object-fit: contain;
+
+}
+
+.tableCell{
+	font-size: 12px !important;
+
+}
+
+.lastCell{
+	
+    height: 100% !important;
+
+	align-self: stretch !important;
+	
+
+}
+
+

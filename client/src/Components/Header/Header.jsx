@@ -6,11 +6,13 @@ import s from '../../commonStyles.module.css'
 import cart from '../../images/Group 830.png'
 import category from '../../images/category.png'
 import search from '../../images/glass.svg'
+import {Link} from 'react-router-dom'
+
 
 
 const Header = () => {
   return (
-	<div>
+	<div className='header'>
 		<section className='top_header'>
 			<div className='phone'>
 				<div className='top_img'>
@@ -24,6 +26,7 @@ const Header = () => {
 					<div className='top_menu_item'>О нас</div>
 					<div className='top_menu_item'>Контакты</div>
 					<div className='top_menu_item'>Доставка</div>
+					<Link to={'/admin'} className='top_menu_item'>Админ панель</Link>
 				</div>
 			</div>
 		</section>
