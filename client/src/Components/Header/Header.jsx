@@ -32,9 +32,9 @@ const Header = () => {
 		</section>
 		<section className='main_header'>
 			<div className='search_block'>
-				<div className='logo'>
+				<Link to='/' className='logo'>
 				<img src={logo} className='logo'/>
-				</div>
+				</Link>
 				<div className='search'>
 					<img src={search} className='search_icon'/>
 					<input type='text' placeholder='Поиск товаров' className='search_input'/>

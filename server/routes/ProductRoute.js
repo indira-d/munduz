@@ -8,7 +8,7 @@ const storage = multer.diskStorage({
 		callback(null, './client/public/uploads')
 	},
 	filename: (req, file, callback) => {
-		callback(null, file.originalname)
+		callback(null, Date.now + file.originalname)
 	}
 })
 
@@ -42,11 +42,11 @@ router.post('/', upload.single('img'), async(req, res) => {
 router.put('/:id', upload.single('img'), async (req, res) => {
 	if(req.file){
 		try {
-		const updatedProduct = await Product.findByIdAndUpdate(
-			req.params.id,
-			{$set: {...req.body, img: req.file.filename}},
-			{new: true}
-		)
+			const updatedProduct = await Product.findByIdAndUpdate(
+				req.params.id,
+				{$set: {...req.body, img: req.file.filename}},
+				{new: true}
+			)
 		res.status(200).json(updatedProduct)
 	} catch (error) {
 		res.status(500).json(error)
@@ -56,7 +56,7 @@ router.put('/:id', upload.single('img'), async (req, res) => {
 		const updatedProduct = await Product.findByIdAndUpdate(
 			req.params.id,
 			{$set: req.body},
-			{new: true}
+			
 		)
 		res.status(200).json(updatedProduct)
 	} catch (error) {
@@ -72,8 +72,6 @@ router.put('/:id', upload.single('img'), async (req, res) => {
 //GET ALL PRODUCTS
 
 router.get('/', async(req, res) => {
-	const newQuery = req.query.new
-	const category = req.query.category
 
 	try {
 		let products = await Product.find()

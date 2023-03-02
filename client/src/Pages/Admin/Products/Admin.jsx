@@ -18,33 +18,32 @@ const Admin = () => {
    const [price, setPrice] = useState()
    const [discount, setDiscount] = useState(0)
    const [inStock, setInStock] = useState(true)
+   const [popular, setPopular] = useState(false)
+   const [type, setType] = useState()
+
    const categories = useSelector(state => state.categories.categories)
    const dispatch = useDispatch()
-
-   console.log('imG', img.name)
-
-   console.log('category', category)
-   console.log('subcategory', subcategory)
 
 
    const submitHandler = (e) => {
       e.preventDefault()
     try {
-  
 
-        const data = {
-                      name, 
-                      img: img.name, 
-                      description, 
-                      category, 
-                      subcategory,
-                      price,
-                      color,
-                      size,
-                      inStock,
-                      discount
-                    }
-              dispatch(addProduct(data))
+         const data = new FormData()
+            data.append('name', name)
+            data.append('price', price)
+            data.append('img', img)
+            data.append('description', description)
+            data.append('category', category)
+            data.append('subcategory', subcategory)
+            data.append('color', color)
+            data.append('size', size)
+            data.append('inStock', inStock)
+            data.append('discount', discount)
+            data.append('popular', popular)
+            data.append('type', type)
+
+       dispatch(addProduct(data))
       
     } catch (error) {
       console.log('error',error)
@@ -52,7 +51,7 @@ const Admin = () => {
    }
 
    const onCategoryChangeHandler = (value) => {
-       setCategory({_id: value, name: categories.find(it => it._id === value).name})
+       setCategory(value)
        setSubcategories(categories.find(it => it._id === value).subcategories)
    }
 
@@ -97,9 +96,14 @@ const Admin = () => {
         className={'select'}
         id='subcategory'
         size='large'
-        onChange={value => setSubcategory(subcategories.find(it => it._id === value))}
+        onChange={value => setSubcategory(value)}
         options={subcategories?.map(el => ({value: el._id, label: el.name}))}
       />
+       <input type='text' 
+          className='form_input'
+          placeholder='Тип'
+          id="type"
+          onChange={e => setType(e.target.value)} />
 
         <input type='number' 
           required
@@ -137,8 +141,17 @@ const Admin = () => {
             onChange={value => setInStock(value)}
             options={[{value: true, label: 'В наличии'}, {value: false, label: 'Отстутствует'}]}
       />
+          <Select
+                placeholder='Хит'
+                className={'select'}
+                size='large'
+                id='popular'
+                title='popular'
+                defaultValue={true}
+                onChange={value => setPopular(value)}
+                options={[{value: true, label: 'Да'}, {value: false, label: 'Нет'}]}
+          />
 
-      
         <input type='file' 
           filename='img' 
           className='form_input'

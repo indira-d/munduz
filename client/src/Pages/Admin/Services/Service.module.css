@@ -1,0 +1,19 @@
+.service{
+	position: absolute ;
+	width: 80% ;
+	top: 0px ;
+	right: 10px;
+	background: blue;
+
+
+}
+
+.all_services{
+	width: 75%;
+	padding: 50px 0;
+	position: absolute;
+	right: 50px;
+	top: 50px;
+	
+}
+

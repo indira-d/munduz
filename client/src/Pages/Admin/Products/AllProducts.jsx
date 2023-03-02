@@ -23,6 +23,8 @@ const AllProducts = () => {
 	const dispatch = useDispatch()
 	const state_products = useSelector(state => state.products.products)
   const [products, setProducts] = useState()
+  const categories = useSelector(state => state.categories.categories)
+  const subcategories = useSelector(state => state.subcategories.subcategories)
 
 	useEffect(() => {
       const request = async (req, res) => {
@@ -65,11 +67,13 @@ const AllProducts = () => {
             <TableCell sx={{fontWeight: 'bold'}} className='tableCell' align="left">Описание</TableCell>
             <TableCell sx={{fontWeight: 'bold'}} className='tableCell' align="left">Категория</TableCell>
             <TableCell sx={{fontWeight: 'bold'}} className='tableCell' align="left">Подкатегория</TableCell>
+            <TableCell sx={{fontWeight: 'bold'}} className='tableCell' align="left">Тип</TableCell>
 			      <TableCell sx={{fontWeight: 'bold'}} className='tableCell' align="left">Цена</TableCell>
             <TableCell sx={{fontWeight: 'bold'}} className='tableCell' align="left">Скидка</TableCell>
 			      <TableCell sx={{fontWeight: 'bold'}} className='tableCell' align="left">Размер</TableCell>
             <TableCell sx={{fontWeight: 'bold'}} className='tableCell' align="left">Цвет</TableCell>
             <TableCell sx={{fontWeight: 'bold'}} className='tableCell' align="left">В наличии</TableCell>
+            <TableCell sx={{fontWeight: 'bold'}} className='tableCell' align="left">Хит</TableCell>
             <TableCell sx={{fontWeight: 'bold'}} className='tableCell' align="left"></TableCell>
            
           </TableRow>
@@ -80,21 +84,25 @@ const AllProducts = () => {
               key={row?._id}
               sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
             >
+
+              {console.log('row', row)}
               <TableCell align="left" className='tableCell'>{index+1}</TableCell>
               <TableCell align="left" className='tableCell'>{row && row.img ? <img src={`/uploads/${row.img}`} className='table_img' alt={row.name}/> : ''} </TableCell>
               <TableCell align="left" className='tableCell'>{row?.name}</TableCell>
               <TableCell align="left" className='tableCell'>{row?.description}</TableCell>
-              <TableCell align="left" className='tableCell'>{row?.category?.name}</TableCell>
-			        <TableCell align="left" className='tableCell'>{row?.subcategory?.name}</TableCell>
+              <TableCell align="left" className='tableCell'>{categories.find(it => it._id === row?.category)?.name}</TableCell>
+			        <TableCell align="left" className='tableCell'>{subcategories.find(it => it._id === row?.subcategory)?.subcategory}</TableCell>
+              <TableCell align="left" className='tableCell'>{row?.type}</TableCell>
               <TableCell align="left" className='tableCell'>{row?.price}</TableCell>
               <TableCell align="left" className='tableCell'>{row?.discount}</TableCell>
               <TableCell align="left" className='tableCell'>{row?.size}</TableCell>
               <TableCell align="left" className='tableCell'>{row?.color}</TableCell>
               <TableCell align="left" className='tableCell'>{row?.inStock ? 'Да' : 'Нет'}</TableCell>
+              <TableCell align="left" className='tableCell'>{row?.popular ? 'Да' : 'Нет'}</TableCell>
               <TableCell  className='lastCell' >
-                <Link to={`/editProduct/${row._id}`} 
+                <Link to={`/editProduct/${row?._id}`} 
                     className='admin_table_btn'
-                    onClick={() => dispatch(getProduct(row._id))}>
+                    onClick={() => dispatch(getProduct(row?._id))}>
                     <EditIcon fontSize='small' className='btns'/>
                 </Link>
                 <button className='admin_table_btn' onClick={() => dispatch(deleteProduct(row._id))}>

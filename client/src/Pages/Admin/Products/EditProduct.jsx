@@ -9,6 +9,7 @@ import {useDispatch, useSelector} from 'react-redux'
 import Sidebar from '../Sidebar';
 import {  updateProduct } from '../../../redux/ProductSlice';
 import { Select} from 'antd';
+import { useParams } from 'react-router-dom';
 
 const EditProduct = () => {
  
@@ -16,57 +17,64 @@ const EditProduct = () => {
    const product = useSelector(state => state.products.product)
    const [row, setRow] = useState()
    const categories = useSelector(state => state.categories.categories)
+   const all_subcategories = useSelector(state => state.subcategories.subcategories)
    const [subcategories, setSubcategories] = useState()
+   const [newImg, setNewImg] = useState('')
+   const params = useParams()
+
+   console.log('params',params)
 
    const onCategoryChangeHandler = (value) => {
-       setRow({...row, category: {_id: value, name: categories?.find(it => it._id === value).name}})
+       setRow({...row, category: value})
        setSubcategories(categories.find(it => it._id === value).subcategories)
    }
-  console.log('subcategories', subcategories)
-   console.log('row', row)
 
    const submitHandler = () => {
-      const data = {
-        name: row?.name, 
-        description: row?.description,
-        img: row?.img, 
-        category: row?.category, 
-        subcategory: row?.subcategory,
-        price: row?.price,
-        color: row?.color,
-        size: row?.size,
-        _id: row?._id,
-        inStock: row?.inStock,
-        discount: row?.discount
-      }
+          const data = new FormData()
+            data.append('name', row?.name)
+            data.append('price', row?.price)
+            data.append('img', row?.img)
+            data.append('description', row?.description)
+            data.append('category', row?.category)
+            data.append('subcategory', row?.subcategory)
+            data.append('color', row?.color)
+            data.append('size', row?.size)
+            data.append('inStock', row?.inStock)
+            data.append('discount', row?.discount)
+            data.append('popular', row?.popular)
+            data.append('type', row?.type)
+            
 
-      console.log('data55', data)
-      dispatch(updateProduct(data))
+      dispatch(updateProduct(product,  params.id))
             // navigate('/')
    }
 
-
+   const onImgChangeHandler = (e) => {
+       e.preventDefault()
+      setRow({...row, img: e.target.files[0]})
+      setNewImg(e.target.files[0])
+   }
 
    useEffect(() => {
-
-    if(Object.keys(product).length !== 0){
-      if(product){
-        setRow({
-        name: product?.name, 
-        description: product?.description,
-        img: product?.img, 
-        category: product.category,
-        subcategory: product?.subcategory,
-        price: product?.price,
-        color: product?.color,
-        type: product?.type,
-        size: product?.size,
-        _id: product?._id,
-        inStock: product?.inStock,
-        discount: product?.discount
-      })
-      }}
-      
+    if(product){
+        if(Object.keys(product).length !== 0){
+        
+            setRow({
+            name: product?.name, 
+            description: product?.description,
+            img: product?.img, 
+            category: product.category,
+            subcategory: product?.subcategory,
+            price: product?.price,
+            color: product?.color,
+            type: product?.type,
+            size: product?.size,
+            _id: product?._id,
+            inStock: product?.inStock,
+            discount: product?.discount
+          })
+          }}
+     
    }, [product])
 
 
@@ -97,21 +105,27 @@ const EditProduct = () => {
         <Select
           className={'select'}
           placeholder='Категория'
-          value={{value: row?.category._id, label: row?.category.name} }
+          value={categories?.filter(it => (it._id === row?.category))?.map(el => ({value: el._id, label: el.name})) }
           name='category'
           size='large'
           onChange = {value => onCategoryChangeHandler(value)}
           options={categories?.map(it => ({value: it._id, label: it.name}))}
         />
-     <Select
-        placeholder='Подкатегория'
-        className={'select'}
-        value={{value: row?.subcategory?._id, label: row?.subcategory?.name}}
-        name='subcategory'
-        size='large'
-        onChange={e => setRow({...row, subcategory : subcategories.find(it => it._id === e)})}
-        options={subcategories?.map(el => ({value: el._id, label: el.name}))}
-      />
+        <Select
+            placeholder='Подкатегория'
+            className={'select'}
+            value={all_subcategories?.filter(it => (it._id === row?.subcategory))?.map(el => ({value: el._id, label: el?.subcategory}))}
+            name='subcategory'
+            size='large'
+            onChange={value => setRow({...row, subcategory: value})}
+            options={subcategories?.map(el => ({value: el._id, label: el.name}))}
+          />
+          <input type='text' 
+            className='form_input'
+            placeholder='Тип'
+            defaultValue={row?.type}
+            name="type"
+            onChange={e => setRow({...row, [e.target.name]: e.target.value})} />
 
         <input type='number' 
           required
@@ -147,23 +161,34 @@ const EditProduct = () => {
             className={'select'}
             size='large'
             name='inStock'
-            value={ row.inStock && row.inStock === true ? {value: true, label: 'В наличии'} : {value: false, label: 'Отсутствует'}}
+            value={ row && row.inStock === true ? {value: true, label: 'В наличии'} : {value: false, label: 'Отсутствует'}}
             onChange={value => setRow({...row, inStock: value})}
             options={[{value: true, label: 'В наличии'}, {value: false, label: 'Отстутствует'}]}
       />
+         <Select
+            placeholder='Хит'
+            className={'select'}
+            size='large'
+            name='popular'
+            value={ row && row.popular === true ? {value: true, label: 'Хит'} : {value: false, label: 'Нет'}}
+            onChange={value => setRow({...row, popular: value})}
+            options={[{value: true, label: 'Хит'}, {value: false, label: 'Нет'}]}
+      />
 
       
-        <input type='file' 
-          filename='img' 
-          className='form_input'
-          //defaultValue={product.img}
-          name='img'
-          onChange={e => setRow({...row, [e.target.name]: e.target.files[0]})}>
-        </input>
-        {/* <div>
-            {product.img && <img src={URL.createObjectURL(product.img)} alt={product.img.name} className='form_img'/> }
-        </div> */}
-        
+          <input type='file' 
+            filename='img' 
+            className='form_input'
+            name='img'
+            onChange={e => onImgChangeHandler(e)}>
+          </input>
+          <div>
+            {
+            newImg
+            ? <img src={URL.createObjectURL(newImg)} alt={row?.img?.name} className='form_img'/>
+            : <img src={`/uploads/${row?.img}`} alt={row?.img?.name} className='form_img'/>   
+          }
+        </div>    
         </div>
           
           <div>

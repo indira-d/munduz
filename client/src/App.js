@@ -14,6 +14,10 @@ import AllProducts from './Pages/Admin/Products/AllProducts';
 import EditProduct from './Pages/Admin/Products/EditProduct';
 import AddCategory from './Pages/Admin/Categories/AddCategory';
 import AllCategories from './Pages/Admin/Categories/AllCategories';
+import AllServices from './Pages/Admin/Services/AllServices';
+import AddService from './Pages/Admin/Services/AddService';
+import EditService from './Pages/Admin/Services/EditService';
+import CategoryList from './Pages/CategoryList/CategoryList';
 
 
 
@@ -30,9 +34,13 @@ function App() {
             <Route path="/catalogue" element={<Catalogue/>} />
             <Route path="/addCategory" element={<AddCategory/>} />
             <Route path="/allCategories" element={<AllCategories/>} />
+            <Route path="/addService" element={<AddService/>} />
+            <Route path="/allServices" element={<AllServices/>} />
+            <Route path="/editService/:id" element={<EditService/>} />
+            <Route path="/category/:id" element={<CategoryList/>} />
        </Routes>
         <ToastContainer
-             position="top-right"
+            position="top-right"
             autoClose={5000}
             hideProgressBar={false}
             newestOnTop={false}

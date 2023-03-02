@@ -1,3 +1,122 @@
-.catalogue{
+.categories_catalogue{
+	width: 100%;
 
+	height: 100%;
+}
+
+.cat_catalogue_content{
+	width: 80%;
+	margin: 20px auto;
+	position: relative;
+	display: grid;
+	grid-template-columns: 250px 1fr;
+	
+}
+
+.catalogue_sidebar{
+
+
+}
+
+.catalogue_header{
+	margin: 20px 5px;
+	font-size: 18px;
+}
+.catalogue_info{
+	width: 95%;
+
+	margin: 0 auto;
+	position: relative;
+
+}
+
+.banner{
+	
+	background: linear-gradient(96.31deg, #2FC0EE 9.21%, #18A9D7 86.21%);
+	position: sticky;
+	right: 0;
+	width: 100%;
+	height: 300px;
+	border-radius: 10px;
+
+}
+
+
+.banner_img_block{
+	position: absolute;
+	bottom: 0;
+	right: 100px;
+	z-index: 3;
+}
+
+.banner_img{
+	width: 400px;
+	height: 260px;
+	object-fit: cover;
+	z-index: 3;
+}
+
+.banner_text_block{
+	color: white;
+	width: 280px;
+	position: absolute;
+	top: 50px;
+	left: 50px;
+}
+
+.banner_text_bloсk h2{
+		font-size: 16px;
+		margin: 15px;
+}
+
+.banner_description{
+	margin: 20px 0;
+	font-size: 14px;
+}
+
+.bunner_button{
+	border: none;
+	outline: none;
+	padding: 10px 20px;
+	border-radius: 10px;
+	margin: 10px 0;
+	background: white;
+	font-weight: 500;
+	transition: all 0.5s ease-in;
+}
+
+.bunner_button:hover{
+	scale: 1.02;
+	-webkit-box-shadow: 0px 5px 10px 2px rgba(34, 60, 80, 0.2);
+	-moz-box-shadow: 0px 5px 10px 2px rgba(34, 60, 80, 0.2);
+	box-shadow: 0px 5px 10px 2px rgba(34, 60, 80, 0.2);
+}
+
+.cyrcle1{
+	width: 380px;
+	height: 380px;
+	background: rgba(255, 255, 255, 0.15);
+	position: absolute;
+	right: 80px;
+	border-radius: 50%;
+	top: 120px;
+	z-index: 1;
+}
+
+.cyrcle2{
+	position: absolute;
+	background: rgba(255, 255, 255, 0.15);
+	width: 500px;
+	height: 500px;
+	border-radius: 50%;
+	right: -150px;
+	top: 20px;
+	z-index: 0;
+
+
+}
+
+.categories_block{
+	margin-top: 30px;
+	width: 100%;
 }

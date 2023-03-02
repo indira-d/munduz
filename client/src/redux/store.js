@@ -14,6 +14,8 @@ import {
 } from 'redux-persist'
 import storage from 'redux-persist/lib/storage'
 import {combineReducers} from "redux";
+import serviceSlice from './ServiceSlice';
+
 
 const persistConfig = {
     key: 'root',
@@ -24,7 +26,8 @@ const persistConfig = {
 const rootReducer = combineReducers({
 	    products: productSlice,
 		categories: categorySlice,
-		subcategories: subcategorySlice
+		subcategories: subcategorySlice,
+        services: serviceSlice,
 })
 
 const persistedReducer = persistReducer(persistConfig, rootReducer)

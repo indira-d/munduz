@@ -3,10 +3,13 @@ import { products } from '../../data'
 import CarouselItem from '../CarouselItem/CarouselItem';
 import './PopularProducts.css'
 import Carousel from 'better-react-carousel';
+import { useSelector } from 'react-redux';
 
 
 
 const PopularProducts = () => {
+
+  const products = useSelector(state => state.products.products)
   return (
 	<section className='popular_products_wrapper'>
 		<h2 className="popular_products_title">

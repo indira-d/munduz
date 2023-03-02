@@ -47,11 +47,12 @@ export const getProduct = createAsyncThunk(
 
 export const updateProduct = createAsyncThunk(
 	'products/updateProduct',
-	async(updatedProduct) => {
+	async(product, id) => {
+		console.log('updatedProductId', product, id )
 		try {
-			const {data} = await publicRequest.put(`/products/${updatedProduct._id}`, updatedProduct)
+			const {result} = await publicRequest.put(`/products/${id}`, product)
 			toast.success('Товар был обновлен')
-			return data
+			return result
 
 		} catch (error) {
 			console.log(error)
@@ -135,6 +136,7 @@ export const productSlice = (createSlice({
 				state.loading = true
 			}) 
 			.addCase(updateProduct.fulfilled, (state, action) => {
+				console.log('action', action)
 				state.loading = false
 				const index = state.products.findIndex(it => it._id === action.payload?._id)
 				state.products[index] = action.payload

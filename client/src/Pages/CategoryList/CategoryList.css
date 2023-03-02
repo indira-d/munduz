@@ -1,0 +1,41 @@
+.cateryList_wrapper{
+
+}
+
+.categoryList_content{
+	margin-top: 20px;
+	padding: 20px;
+
+}
+
+.categoryList_content h2{
+	font-size: 20px;
+	margin: 15px 0;
+}
+
+.subtitle{
+	color: grey;
+	font-size: 12px;
+	margin: 10px 0;
+}    
+
+.categoryList{
+	width: 80%;
+	margin: 0 auto;
+	display: grid;
+	grid-template-columns: 250px 1fr;
+}
+
+.category_btn{
+	padding: 8px 15px;
+	margin: 10px;
+	border: none;
+	outline: none;
+	background: #E21ECA;
+	color: white;
+	border-radius: 5px;
+}
+
+.subcategories_product{
+	display: flex;
+}

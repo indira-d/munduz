@@ -17,17 +17,20 @@ import ModeEditIcon from '@mui/icons-material/ModeEdit';
 import { Link } from 'react-router-dom';
 
 
-const drawerWidth = 240;
+const drawerWidth = 200;
 
 export default function Sidebar() {
 
   return (
-    <Box sx={{ display: 'flex', position: 'relative', fontSize: '10px' }}>
+    <Box sx={{ display: 'flex', position: 'relative' }}>
       <CssBaseline />
-      <AppBar position="fixed" sx={{ zIndex: (theme) => theme.zIndex.drawer + 1, background: '#E21ECA', letterSpacing: '0.5px' }}>
+      <AppBar position="fixed" sx={{ zIndex: (theme) => theme.zIndex.drawer + 1, background: '#f5f2f2', letterSpacing: '0.5px' }}>
         <Toolbar>
           <Typography variant="h6" noWrap component="div">
-            Админ панель
+               <Link to='/' className='link'>
+                 <img src={'/client/public/uploads/logo.svg'} />
+               </Link>
+           
           </Typography>
         </Toolbar>
       </AppBar>
@@ -40,39 +43,27 @@ export default function Sidebar() {
         }}
       >
         <Toolbar />
-        <Box sx={{ overflow: 'auto' }}>
+        <Box sx={{ overflow: 'auto', fontSize: 13, fontWeight: 600, letterSpacing: 0.5,paddingTop: '20px'}}>
        
           <List>
-            <ListItem key={'Главная'} disablePadding>
-                <Link to='/' className='link'>
-                  <ListItemButton>
-                    <ListItemIcon>
-                      { <ModeEditIcon/> }
-                    </ListItemIcon>
-                    <ListItemText primary={'Главная'} />
-                  </ListItemButton>
-                </Link>
-                   <Divider />
-                
-              </ListItem>
               <ListItem key={'Все товары'} disablePadding>
-                <Link to='/allProducts' className='link'>
+                <Link to='/allProducts' style={{textDecoration: 'none', color: 'rgba(0, 0, 0, 0.87)'}}>
                   <ListItemButton>
                     <ListItemIcon>
                       { <ModeEditIcon/> }
                     </ListItemIcon>
-                    <ListItemText primary={'Все товары'} />
+                    <div>Все товары</div>
                   </ListItemButton>
                 </Link>    
               </ListItem>
 
               <ListItem key={'Добавить товар'} disablePadding>
-                <Link to='/addProduct' className='link'>
+                <Link to='/addProduct' style={{textDecoration: 'none', color: 'rgba(0, 0, 0, 0.87)'}}>
                   <ListItemButton>
                     <ListItemIcon>
                       { <ModeEditIcon/> }
                     </ListItemIcon>
-                    <ListItemText primary={'Добавить товар'} />
+                    <div>Добавить товар</div>
                   </ListItemButton>
                 </Link>
               </ListItem>
@@ -80,26 +71,50 @@ export default function Sidebar() {
           <Divider />
           <List>
               <ListItem key={'Все категории'} disablePadding>
-                <Link to='/allCategories' className='link'>
+                <Link to='/allCategories' style={{textDecoration: 'none', color: 'rgba(0, 0, 0, 0.87)'}}>
                   <ListItemButton>
                     <ListItemIcon>
                       { <ModeEditIcon/> }
                     </ListItemIcon>
-                    <ListItemText primary={'Все категории'} />
+                    <div>Все категории</div>
                   </ListItemButton>
                 </Link>    
               </ListItem>
 
               <ListItem key={'Добавить категорию'} disablePadding>
-                <Link to='/addCategory' className='link'>
+                <Link to='/addCategory' style={{textDecoration: 'none', color: 'rgba(0, 0, 0, 0.87)'}}>
                   <ListItemButton>
                     <ListItemIcon>
                       { <ModeEditIcon/> }
                     </ListItemIcon>
-                    <ListItemText primary={'Добавить категорию'} />
+                    <div>Добавить категорию</div>
                   </ListItemButton>
                 </Link>
               </ListItem>
+          </List>
+          <Divider />
+              <List>
+                <ListItem key={'Все услуги'} disablePadding>
+                  <Link to='/allServices' style={{textDecoration: 'none', color: 'rgba(0, 0, 0, 0.87)'}}>
+                    <ListItemButton>
+                      <ListItemIcon>
+                        { <ModeEditIcon/> }
+                      </ListItemIcon>
+                      <div>Все услуги</div>
+                    </ListItemButton>
+                  </Link>    
+                </ListItem>
+
+                <ListItem key={'Добавить услугу'} disablePadding>
+                  <Link to='/addService' style={{textDecoration: 'none', color: 'rgba(0, 0, 0, 0.87)'}}>
+                    <ListItemButton>
+                      <ListItemIcon>
+                        { <ModeEditIcon/> }
+                      </ListItemIcon>
+                      <div>Добавить услугу</div>
+                    </ListItemButton>
+                  </Link>
+                </ListItem>
           </List>
           <Divider />
           <List>
@@ -116,10 +131,6 @@ export default function Sidebar() {
           </List>
         </Box>
       </Drawer>
-      {/* <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
-        <Toolbar />
-       
-      </Box> */}
     </Box>
   );
 }

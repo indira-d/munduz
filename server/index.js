@@ -6,6 +6,7 @@ mongoose.set("strictQuery", false);
 const productRoute = require('./routes/ProductRoute')
 const categoryRoute = require('./routes/CategoryRoute')
 const subcategoryRoute = require('./routes/SubcategoryRoute')
+const serviceRoute = require('./routes/ServiceRoute')
 
 
 const app = express()
@@ -22,6 +23,7 @@ mongoose
 app.use("/products", productRoute)
 app.use("/categories", categoryRoute)
 app.use("/subcategories", subcategoryRoute)
+app.use("/services", serviceRoute)
 
 app.listen(process.env.PORT , () => {
 	console.log(`Server is running on port ${process.env.PORT}`)

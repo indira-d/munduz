@@ -16,6 +16,11 @@ const AddCategory = () => {
    const categories = useSelector(state => state.categories.categories)
    const dispatch = useDispatch()
 
+    const resetFields = () => {
+      setName('')
+      setImg('')
+    }
+
    
    const createCategory = () => {
      const formData = new FormData()
@@ -23,6 +28,7 @@ const AddCategory = () => {
             formData.append('name', name)
 
       dispatch(addCategory(formData))
+      resetFields()
    }
 
    const createSubcategory = () => {
