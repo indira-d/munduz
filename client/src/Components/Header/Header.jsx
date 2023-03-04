@@ -1,16 +1,18 @@
 import React from 'react'
 import './Header.css'
-import phone from '../../assets/phone_icon.svg'
-import logo from '../../assets/logo.svg'
+import phone from '../../images/phone_icon.svg'
+import logo from '../../images/logo.svg'
 import s from '../../commonStyles.module.css'
-import cart from '../../assets/Group 830.png'
-import category from '../../assets/category.png'
-import search from '../../assets/glass.svg'
+import cart from '../../images/Group 830.png'
+import category from '../../images/category.png'
+import search from '../../images/glass.svg'
+import {Link} from 'react-router-dom'
+
 
 
 const Header = () => {
   return (
-	<div>
+	<div className='header'>
 		<section className='top_header'>
 			<div className='phone'>
 				<div className='top_img'>
@@ -24,19 +26,18 @@ const Header = () => {
 					<div className='top_menu_item'>О нас</div>
 					<div className='top_menu_item'>Контакты</div>
 					<div className='top_menu_item'>Доставка</div>
+					<Link to={'/admin'} className='top_menu_item'>Админ панель</Link>
 				</div>
 			</div>
 		</section>
 		<section className='main_header'>
 			<div className='search_block'>
-				<div className='logo'>
+				<Link to='/' className='logo'>
 				<img src={logo} className='logo'/>
-				</div>
+				</Link>
 				<div className='search'>
 					<img src={search} className='search_icon'/>
-					<input type='text' placeholder='Поиск товаров' className='search_input'>
-						
-					</input>
+					<input type='text' placeholder='Поиск товаров' className='search_input'/>
 				</div>
 				<div className='header_items'>
 					<div className='catalogue'>
@@ -50,7 +51,8 @@ const Header = () => {
 				</div>
 			</div>
 			
-			<div className='categories'>
+			
+			<section className='categories'>
 				<button className="category_item">Продукты питания</button>
 				<button className="category_item">Овощи и фрукты</button>
 				<button className="category_item">Молочная продукция</button>
@@ -59,10 +61,9 @@ const Header = () => {
 				<button className="category_item">Сухофрукты</button>
 				<button className="category_item">Напитки</button>
 				<button className="category_item">Полуфабрикаты</button>
-				<button className="category_item" style={{fontSize: '20px'}}>...</button>
-			</div>
-
-		</section>
+				<button className="category_item" style={{fontSize: '20px', width: '50px'}}>...</button>
+			</section>
+			</section>
 	</div>
   )
 }

@@ -1,0 +1,140 @@
+.footer{
+	width: 80%;
+	margin: 50px auto;
+	display: flex;
+
+}
+
+.footer_logo{
+	width: 250px;
+	margin-bottom: 25px;
+}
+.footer_container{
+	display: flex;
+	justify-content: space-between;
+	flex-direction: column;
+	width: 70%;
+}
+.footer_links{
+	width: 426px;
+	height: 207px;
+	border-radius: 12px;
+	background: #F9F9F9;
+	position: relative;
+
+}
+
+.footer_items_wrapper{
+	display: flex;
+	justify-content: space-between;
+	margin-right: 80px;
+}
+
+.footer_subtitle{
+	color: #8B8B8B;
+	font-weight: 500;
+	font-size: 13px;
+	margin: 15px 0;
+}
+
+.footer_item_name{
+	font-size: 16px;
+	font-size: 500;
+	line-height: 2;
+
+}
+
+.footer_links_img{
+	position: absolute;
+	bottom: 0;
+	right: 40px;
+	
+}
+
+.footer_title{
+	width: 200px;
+	font-size: 18px;
+	font-weight: 600;
+	line-height: 1.5;
+	margin: 15px;
+}
+
+.footer_description{
+	color: #41323F;
+	font-size: 14px;
+	line-height: 1.5;
+	margin: 15px;
+}
+
+.subscribe{
+	background: #E21ECA;
+	color: #fff;
+	width: 141px;
+	height: 36px;
+	border-radius: 10px;
+	border: none;
+	outline: none;
+	margin: 5px 15px;
+
+}
+
+.footer_links_img{
+	margin: 20px 0;
+	display: flex;
+}
+
+.footer_icons{
+	display: flex;
+	margin-top: 25px;
+}
+
+.footer_icon{
+	display: flex;
+	align-items: center;
+}
+
+
+.odnoklassniki{
+	width: 35px;
+	height: 35px;
+	margin-right: 5px;
+	transition: all .5s ease-in;
+	background-repeat: no-repeat;
+	background-image:url('../../images/odnoklassniki1.svg');
+}
+
+.odnoklassniki:hover{
+
+	background-image:url('../../images/odnoklassniki2.svg');
+}
+
+.telegram {
+	width: 35px;
+	height: 35px;
+	margin: 10px;
+	transition: all .5s ease-in;
+	background-repeat: no-repeat;
+	background-image:url('../../images/telegram.svg');
+}
+
+.telegram:hover{
+	background-image:url('../../images/telegram2.svg');
+}
+
+.vk{
+	width: 35px;
+	height: 35px;
+	margin: 10px;
+	transition: all .5s ease-in;
+	background-repeat: no-repeat;
+	background-image:url('../../images/vk.svg');
+}
+
+.vk:hover{
+	background-image:url('../../images/vk2.svg');
+}
+
+
+.footer_icon_text{
+	font-size: 13px;
+}
