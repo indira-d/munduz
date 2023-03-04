@@ -10,9 +10,8 @@ const PopularServices = () => {
 	const services = useSelector(state => state.services.services)
   return (
 	<div className='services'>
-		<h2>Популярные услуги</h2>
-			<div className='popular_items'>
-		 <div className="carousel_wrapper">
+
+
       <Carousel cols={5} rows={1} gap={5} loop >
       	{
 			services.map(el =>  
@@ -22,8 +21,8 @@ const PopularServices = () => {
              )
         }
     </Carousel>
-    </div>
-		</div>
+ 
+
 	</div>
   )
 }

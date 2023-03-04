@@ -38,7 +38,19 @@ const Home = () => {
 			position: 'absolute',
 			right: '10%'
 			}}> Смотреть все</Link>
+		<h2 style={{width: '80%', margin: '20px auto'}}>Популярные товары</h2>
 		<PopularProducts />
+		<h2 style={{width: '80%', margin: '40px auto'}}>Прекрасно подойдет для Нооруза</h2>
+		<CategoryItem numberOfItems={4}/>
+		<h2 style={{width: '80%', margin: '20px auto'}}>Популярные услуги</h2>
+		<PopularServices />
+		<h2 style={{width: '80%', margin: '0px auto'}}>Дети это любят</h2>
+		<PopularProducts />
+		<h2 style={{width: '80%', margin: '0px auto'}}>Самое вкусное в напитках</h2>
+		<PopularProducts />
+		<h2 style={{width: '80%', margin: '40px auto'}}>Для семейного застолья</h2>
+		<CategoryItem numberOfItems={4}/>
+		<h2 style={{width: '80%', margin: '40px auto'}}>Скоро приедут гости?</h2>
 		<PopularServices />
 		<Footer />
 	</div>

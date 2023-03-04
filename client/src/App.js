@@ -18,6 +18,8 @@ import AllServices from './Pages/Admin/Services/AllServices';
 import AddService from './Pages/Admin/Services/AddService';
 import EditService from './Pages/Admin/Services/EditService';
 import CategoryList from './Pages/CategoryList/CategoryList';
+import ProductDetail from './Pages/ProductDetail/ProductDetail';
+import Cart from './Pages/Cart/Cart';
 
 
 
@@ -38,6 +40,8 @@ function App() {
             <Route path="/allServices" element={<AllServices/>} />
             <Route path="/editService/:id" element={<EditService/>} />
             <Route path="/category/:id" element={<CategoryList/>} />
+            <Route path="/product/:id" element={<ProductDetail/>} />
+            <Route path="/cart" element={<Cart/>} />
        </Routes>
         <ToastContainer
             position="top-right"

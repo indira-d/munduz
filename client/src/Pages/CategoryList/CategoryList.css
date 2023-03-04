@@ -31,8 +31,17 @@
 	margin: 10px;
 	border: none;
 	outline: none;
+
+	border-radius: 5px;
+}
+
+.active_btn{
+	padding: 8px 15px;
+	margin: 10px;
+	border: none;
+	outline: none;
 	background: #E21ECA;
-	color: white;
+    color: white;	
 	border-radius: 5px;
 }
 

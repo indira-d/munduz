@@ -4,15 +4,12 @@ import {  Layout, Menu, theme } from 'antd';
 import { useSelector } from 'react-redux';
 const {  Content,  Sider } = Layout;
 
-
-
-const CatalogueSidebar = () => {
+const CatalogueSidebar = ({onMenuChangeHandler}) => {
 
 	const state_categories = useSelector(state => state.categories.categories)
 
 	const items2 = state_categories.map(
 		(it, index) => {
-
 			return {
 			key: `${it._id}`,
 			label: ` ${it.name}`,
@@ -38,15 +35,18 @@ const {
 	<Layout>
 		<Content style={{width: '100%', background:'gold'}}>
 			<Layout style={{ background: colorBgContainer }}>
-			<Sider style={{ background: colorBgContainer }}  width={250}>
-				<Menu
-					mode="inline"
-					 defaultSelectedKeys={['1']}
-					 defaultOpenKeys={['sub1']}
-					style={{ height: '100%' }}
-					items={items2}
-				/>
-			</Sider>
+				<Sider style={{ background: colorBgContainer }}  width={250}
+				//  onClick = {e => onMenuCategoryChangeHandler (e)}
+				>
+					<Menu
+						mode="inline"
+						defaultSelectedKeys={['1']}
+						defaultOpenKeys={['sub1']}
+						style={{ height: '100%' }}
+						items={items2}
+						onClick={(e) => onMenuChangeHandler(e)}
+					/>
+				</Sider>
 			</Layout>
 		</Content>
 	</Layout>
