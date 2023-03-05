@@ -14,13 +14,9 @@ const CategoryList = () => {
   const params = useParams()
   const products = (useSelector(state => state.products.products))
   const defaultSubcategory = categories.find(it => it._id === params.id).subcategories[0]
-
-
   const [isBtnActive, setIsButtonActive] = useState()
   const [subcategoryProducts, setSubcategoryProducts] = useState(products.filter(it => it.subcategory === defaultSubcategory._id))
 
-
-  console.log('subcategoryProducts', subcategoryProducts)
 
   const onSubcategoryChangeHandler = (subcategory, e) => {
     const result = products.filter(it => it.subcategory === subcategory._id)
@@ -33,14 +29,11 @@ const CategoryList = () => {
   }
 
   const onMenuCategoryChangeHandler = (value) => {
-
-    console.log('value', value)
       const result = products.filter(it => it.category === value.key)
       setSubcategoryProducts(result)
   }
 
   const onMenuChangeHandler = (value)=> {
-   console.log('value', value)
       const result = products.filter(it => it.subcategory === value.key)
       setSubcategoryProducts(result)
   }

@@ -7,10 +7,13 @@ import cart from '../../images/Group 830.png'
 import category from '../../images/category.png'
 import search from '../../images/glass.svg'
 import {Link} from 'react-router-dom'
+import { useSelector } from 'react-redux';
 
 
 
 const Header = () => {
+
+const categories = useSelector(state => state.categories.categories)
   return (
 	<div className='header'>
 		<section className='top_header'>
@@ -41,27 +44,28 @@ const Header = () => {
 				</div>
 				<div className='header_items'>
 					<div className='catalogue'>
-						<button className={s.button}>
+						<Link to='/catalogue' className={s.button} style={{textDecoration: 'none', color: 'black'}}>
 							<img src={category} className='button_icon'/>
-							Каталог</button>
-						<button className={s.button}>
+							Каталог</Link>
+						<Link to='/cart' className={s.button} style={{textDecoration: 'none', color: 'black'}}>
 							<img src={cart} className='button_icon'/>
-							Корзина</button>
+							Корзина</Link>
 					</div>
 				</div>
 			</div>
 			
 			
 			<section className='categories'>
-				<button className="category_item">Продукты питания</button>
-				<button className="category_item">Овощи и фрукты</button>
-				<button className="category_item">Молочная продукция</button>
-				<button className="category_item">Выпечка</button>
-				<button className="category_item">Бакалея</button>
-				<button className="category_item">Сухофрукты</button>
-				<button className="category_item">Напитки</button>
-				<button className="category_item">Полуфабрикаты</button>
-				<button className="category_item" style={{fontSize: '20px', width: '50px'}}>...</button>
+				{
+					categories
+					.filter((it, index) => (index <= 8))
+					.map(el =>
+						<Link to={`/category/${el?._id}`} 
+						style={{textDecoration: 'none', color: 'black'}}
+						className="category_item">{el?.name}</Link>
+					)
+				}
+				<Link to={`/catalogue`} className="category_item" style={{fontSize: '20px', width: '50px', textDecoration: 'none', color: 'black'}}>...</Link>
 			</section>
 			</section>
 	</div>
