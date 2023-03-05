@@ -58,8 +58,8 @@ const categories = useSelector(state => state.categories.categories)
 			<section className='categories'>
 				{
 					categories
-					.filter((it, index) => (index <= 8))
-					.map(el =>
+					?.filter((it, index) => (index <= 8))
+					?.map(el =>
 						<Link to={`/category/${el?._id}`} 
 						style={{textDecoration: 'none', color: 'black'}}
 						className="category_item">{el?.name}</Link>
