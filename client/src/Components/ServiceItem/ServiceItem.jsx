@@ -3,7 +3,6 @@ import noImage from '../../images/no_img.png'
 import './ServiceItem.css'
 
 const ServiceItem = ({data}) => {
-	console.log('data', data)
   return (
 	<div className="service_item_wrapper">
 		<img src={`/uploads/${data.img}`} alt='' className="service_img" />

@@ -18,7 +18,7 @@ const Admin = () => {
    const [price, setPrice] = useState()
    const [discount, setDiscount] = useState(0)
    const [inStock, setInStock] = useState(true)
-   const [popular, setPopular] = useState(false)
+   const [popular, setPopular] = useState()
    const [type, setType] = useState()
 
    const categories = useSelector(state => state.categories.categories)

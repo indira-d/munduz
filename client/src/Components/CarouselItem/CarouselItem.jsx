@@ -3,7 +3,6 @@ import noImage from '../../images/no_img.png'
 import './CarouselItem.css'
 
 const CarouselItem = ({data}) => {
-	console.log('data', data)
   return (
 	<div className="carousel_item_wrapper">
 		<div className='popular'>ХИТ</div>
