@@ -39,27 +39,26 @@ export const getProduct = createAsyncThunk(
 	'products/getProduct',
 	async(id) => {
 		try {
-			const {data} = await publicRequest.get(`/products/${id}`, id)
+			const {data} = await publicRequest.get(`/products/${id}`)
 			return data
-		} catch (error) {}
+		} catch (error) {
+			console.log(error)
+		}
 	}
 )
 
 export const updateProduct = createAsyncThunk(
 	'products/updateProduct',
-	async(product, id) => {
-		console.log('updatedProductId', product, id )
+	async(data) => {
 		try {
-			const {result} = await publicRequest.put(`/products/${id}`, product)
+			const {result} = await publicRequest.put(`/products/${data.id}`, data.product)
 			toast.success('Товар был обновлен')
 			return result
-
 		} catch (error) {
 			console.log(error)
 			toast.error('error')
 		}
 	}
-
 )
 
 export const deleteProduct = createAsyncThunk(
@@ -87,6 +86,7 @@ export const productSlice = (createSlice({
 				state.loading = true
 			}) 
 			.addCase(addProduct.fulfilled, (state, action) => {
+				console.log('action', action)
 				state.loading = false
 				state.products = [...state.products, action.payload]
 			}) 

@@ -14,6 +14,7 @@ import { useSelector } from 'react-redux';
 const Header = () => {
 
 const categories = useSelector(state => state.categories.categories)
+const cart_quantity = useSelector(state => state.cart.cart.length)
   return (
 	<div className='header'>
 		<section className='top_header'>
@@ -29,7 +30,7 @@ const categories = useSelector(state => state.categories.categories)
 					<div className='top_menu_item'>О нас</div>
 					<div className='top_menu_item'>Контакты</div>
 					<div className='top_menu_item'>Доставка</div>
-					<Link to={'/admin'} className='top_menu_item'>Админ панель</Link>
+					<Link to={'/allProducts'} className='top_menu_item'>Админ панель</Link>
 				</div>
 			</div>
 		</section>
@@ -48,8 +49,10 @@ const categories = useSelector(state => state.categories.categories)
 							<img src={category} className='button_icon'/>
 							Каталог</Link>
 						<Link to='/cart' className={s.button} style={{textDecoration: 'none', color: 'black'}}>
+							{cart_quantity > 0? <div className='cart_info'>{cart_quantity}</div> : null}
 							<img src={cart} className='button_icon'/>
-							Корзина</Link>
+							Корзина
+							</Link>
 					</div>
 				</div>
 			</div>

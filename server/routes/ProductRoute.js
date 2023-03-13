@@ -51,12 +51,12 @@ router.put('/:id', upload.single('img'), async (req, res) => {
 	} catch (error) {
 		res.status(500).json(error)
 	}
-	} else {
+} else {
 		try {
 		const updatedProduct = await Product.findByIdAndUpdate(
 			req.params.id,
 			{$set: req.body},
-			
+				{new: true}
 		)
 		res.status(200).json(updatedProduct)
 	} catch (error) {
@@ -93,12 +93,11 @@ router.delete ('/:id', async(req, res) => {
 
 //GET ONE PRODUCT
 router.get('/:id', async(req, res) => {
-	
 	try {
 		const product = await Product.findById(req.params.id)
 		res.status(200).json(product)
 	} catch (error) {
-		res.status(500).json(err)
+		res.status(500).json(error)
 	}
 })
 

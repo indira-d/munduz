@@ -55,19 +55,19 @@ export const getAllSubcategories = createAsyncThunk(
 
 // )
 
-// export const deleteProduct = createAsyncThunk(
-// 	'products/deleteProduct',
-// 	async(id) => {
-// 		try {
-// 			const {data} = await publicRequest.delete(`/products/${id}`, id)
-// 			toast.success('Товар был удален')
-// 			return data
-// 		} catch (error) {
-// 			console.log(error)
-// 			toast.error(error)
-// 		}
-// 	}
-// )
+export const deleteSubcategory = createAsyncThunk(
+	'subcategory/deleteSubcategory',
+	async(id) => {
+		try {
+			const {data} = await publicRequest.delete(`/subcategories/${id}`, id)
+			toast.success('Подкатегория была удалена')
+			return data
+		} catch (error) {
+			console.log(error)
+			toast.error(error)
+		}
+	}
+)
 
 export const subcategorySlice = (createSlice({
 	name: 'subcategories',
@@ -99,17 +99,17 @@ export const subcategorySlice = (createSlice({
 				state.loading = false
 			}) 
 
-		// //DELETE PRODUCT
-		// 	.addCase(deleteProduct.pending, state => {
-		// 		state.loading = true
-		// 	}) 
-		// 	.addCase(deleteProduct.fulfilled, (state, action) => {
-		// 		state.loading = false
-		// 		state.products = state.products.filter(it => it._id !== action.payload)
-		// 	}) 
-		// 	.addCase(deleteProduct.rejected, state => {
-		// 		state.loading = false
-		// 	}) 
+		 //DELETE SUBCATEGORY
+			.addCase(deleteSubcategory.pending, state => {
+				state.loading = true
+			}) 
+			.addCase(deleteSubcategory.fulfilled, (state, action) => {
+				state.loading = false
+				state.subcategories = state.subcategories.filter(it => it._id !== action.payload)
+			}) 
+			.addCase(deleteSubcategory.rejected, state => {
+				state.loading = false
+			}) 
 		
 	 
 		

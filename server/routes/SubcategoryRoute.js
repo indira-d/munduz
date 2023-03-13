@@ -37,9 +37,6 @@ router.post('/',  async(req, res) => {
 //GET ALL SUBCATEGORIES
 
 router.get('/', async(req, res) => {
-	// const newQuery = req.query.new
-	// const category = req.query.category
-
 	try {
 		let subcategories = await Subcategory.find()
 		res.status(200).json(subcategories)
@@ -47,5 +44,16 @@ router.get('/', async(req, res) => {
 		res.status(500).json(error)
 	}
 })
+
+//DELETE SUBCATEGORY
+
+router.delete ('/:id', async(req, res) => {
+	try {
+		await Subcategory.findByIdAndDelete(req.params.id)
+	} catch (error) {
+		res.status(500).json(error)
+	}
+})
+
 
 module.exports = router

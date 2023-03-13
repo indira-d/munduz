@@ -1,13 +1,8 @@
 import React, {useState, useEffect} from 'react'
-import TextField from '@mui/material/TextField';
-import { styled } from '@mui/material/styles';
-import Box from '@mui/material/Box';
-import './Admin.css'
-import Button from '@mui/material/Button';
-import './Admin.css'
+import './AddProduct.css'
 import {useDispatch, useSelector} from 'react-redux'
 import Sidebar from '../Sidebar';
-import {  updateProduct } from '../../../redux/ProductSlice';
+import { updateProduct } from '../../../redux/ProductSlice';
 import { Select} from 'antd';
 import { useParams } from 'react-router-dom';
 
@@ -22,15 +17,16 @@ const EditProduct = () => {
    const [newImg, setNewImg] = useState('')
    const params = useParams()
 
-   console.log('params',params)
-
    const onCategoryChangeHandler = (value) => {
        setRow({...row, category: value})
        setSubcategories(categories.find(it => it._id === value).subcategories)
    }
 
+   console.log('row2', row)
+
    const submitHandler = () => {
-          const data = new FormData()
+    try {
+      const data = new FormData()
             data.append('name', row?.name)
             data.append('price', row?.price)
             data.append('img', row?.img)
@@ -41,13 +37,15 @@ const EditProduct = () => {
             data.append('size', row?.size)
             data.append('inStock', row?.inStock)
             data.append('discount', row?.discount)
-            data.append('popular', row?.popular)
-            data.append('type', row?.type)
+            data.append('popular', row?.popular ? row.popular : false)
+            data.append('selection1', row?.selection1 ? row.selection1 : '')
+            data.append('selection2', row?.selection2 ? row.selection2 : '')
             
 
-      dispatch(updateProduct(product,  params.id))
-            // navigate('/')
-   }
+      dispatch(updateProduct({product: data,  id: params.id}))
+    } catch (error) {
+      console.log(error)
+    }}
 
    const onImgChangeHandler = (e) => {
        e.preventDefault()
@@ -58,7 +56,6 @@ const EditProduct = () => {
    useEffect(() => {
     if(product){
         if(Object.keys(product).length !== 0){
-        
             setRow({
             name: product?.name, 
             description: product?.description,
@@ -67,14 +64,14 @@ const EditProduct = () => {
             subcategory: product?.subcategory,
             price: product?.price,
             color: product?.color,
-            type: product?.type,
             size: product?.size,
             _id: product?._id,
             inStock: product?.inStock,
-            discount: product?.discount
+            discount: product?.discount,
+            selection1: product?.selection1 || '',
+            selection2: product?.selection2 || ''
           })
-          }}
-     
+          }}    
    }, [product])
 
 
@@ -83,122 +80,133 @@ const EditProduct = () => {
     <Sidebar />
     <h2 className='admin_header'>Редактировать товар</h2>
         <form onSubmit={e => e.preventDefault()} encType="multipart/form-data" className='form'>
-       <div>
-        <input
-          required
+       <div style={{display: 'flex', flexWrap: 'wrap'}}>
+        <div>
+          <div className='subtitle'>Наименование</div>
+          <input
+            required
+            className='form_input'
+            value={row?.name}
+            onChange={e => setRow({...row, name: e.target.value})}
+          />
+        </div>
+        <div>
+          <div className='subtitle'>Описание</div>
+          <input
           className='form_input'
-          name="name"
-          label="Наименование"
-          defaultValue={row?.name}
-          placeholder='Наименование'
-          onChange={e => setRow({...row, [e.target.name]: e.target.value})}
-        />
-        <input
-          className='form_input'
-          name="description"
-          label="Описание"
           defaultValue={row?.description}
-          placeholder='Описание'
-          onChange={e => setRow({...row, [e.target.name]: e.target.value})}
+          onChange={e => setRow({...row, description: e.target.value})}
         />
-       
-        <Select
+        </div>
+        <div>
+          <div className='subtitle'>Категория</div>
+          <Select
           className={'select'}
-          placeholder='Категория'
           value={categories?.filter(it => (it._id === row?.category))?.map(el => ({value: el._id, label: el.name})) }
-          name='category'
           size='large'
           onChange = {value => onCategoryChangeHandler(value)}
           options={categories?.map(it => ({value: it._id, label: it.name}))}
         />
-        <Select
-            placeholder='Подкатегория'
+        </div>
+        <div>
+          <div className='subtitle'> Подкатегория</div>
+          <Select
             className={'select'}
             value={all_subcategories?.filter(it => (it._id === row?.subcategory))?.map(el => ({value: el._id, label: el?.subcategory}))}
-            name='subcategory'
             size='large'
             onChange={value => setRow({...row, subcategory: value})}
             options={subcategories?.map(el => ({value: el._id, label: el.name}))}
           />
-          <input type='text' 
-            className='form_input'
-            placeholder='Тип'
-            defaultValue={row?.type}
-            name="type"
-            onChange={e => setRow({...row, [e.target.name]: e.target.value})} />
-
-        <input type='number' 
-          required
-          className='form_input'
-          placeholder='Цена'
-          defaultValue={row?.price}
-          name="price"
-          onChange={e => setRow({...row, [e.target.name]: Number(e.target.value)})} />
-          
-          <input type='text' 
-          className='form_input'
-          placeholder='Размер'
-          defaultValue={row?.size}
-          name="size"
-          onChange={e => setRow({...row, [e.target.name]: e.target.value})} />
-
-          <input type='text' 
-            className='form_input'
-            placeholder='Цвет'
-            defaultValue={row?.color}
-            name="color"
-            onChange={e => setRow({...row, [e.target.name]: e.target.value})} />
-          
+        </div>
+        <div>
+          <div className='subtitle'>Цена</div>
           <input type='number' 
+            required
             className='form_input'
-            placeholder='Скидка'
-            defaultValue={row?.discount}
-            name="discount"
-            onChange={e => setRow({...row, [e.target.name]: Number(e.target.value)})} />
-          
-          <Select
-            placeholder='Товар на складе'
-            className={'select'}
-            size='large'
-            name='inStock'
-            value={ row && row.inStock === true ? {value: true, label: 'В наличии'} : {value: false, label: 'Отсутствует'}}
-            onChange={value => setRow({...row, inStock: value})}
-            options={[{value: true, label: 'В наличии'}, {value: false, label: 'Отстутствует'}]}
-      />
-         <Select
-            placeholder='Хит'
-            className={'select'}
-            size='large'
-            name='popular'
-            value={ row && row.popular === true ? {value: true, label: 'Хит'} : {value: false, label: 'Нет'}}
-            onChange={value => setRow({...row, popular: value})}
-            options={[{value: true, label: 'Хит'}, {value: false, label: 'Нет'}]}
-      />
-
-      
-          <input type='file' 
-            filename='img' 
+            defaultValue={row?.price}
+            onChange={e => setRow({...row, price: Number(e.target.value)})} />
+        </div>
+        <div>
+          <div className='subtitle'>
+            Размер/Объем/Вес
+          </div>
+          <input type='text' 
             className='form_input'
-            name='img'
-            onChange={e => onImgChangeHandler(e)}>
-          </input>
+            defaultValue={row?.size}
+            onChange={e => setRow({...row, size: e.target.value})} />
+        </div>
+          <div>
+            <div className='subtitle'>Цвет</div>
+             <input type='text' 
+              className='form_input'
+              defaultValue={row?.color}
+              onChange={e => setRow({...row, color: e.target.value})} />
+            </div>
+         
+          <div>
+            <div className='subtitle'>Скидка</div>
+            <input type='number' 
+              className='form_input'
+              defaultValue={row?.discount}
+              onChange={e => setRow({...row, discount: Number(e.target.value)})} />
+          </div>
+          <div>
+            <div className='subtitle'>В наличии</div>
+            <Select
+              className={'select'}
+              size='large'
+              value={ row && row.inStock === true ? {value: true, label: 'В наличии'} : {value: false, label: 'Отсутствует'}}
+              onChange={value => setRow({...row, inStock: value})}
+              options={[{value: true, label: 'В наличии'}, {value: false, label: 'Отстутствует'}]}
+            />
+          </div>
+          <div>
+            <div className='subtitle'>Хит</div>
+            <Select
+              className={'select'}
+              size='large'
+              value={ row && row.popular === true ? {value: true, label: 'Хит'} : {value: false, label: 'Нет'}}
+              onChange={value => setRow({...row, popular: value})}
+              options={[{value: true, label: 'Хит'}, {value: false, label: 'Нет'}]}
+            />
+          </div>
+          <div>
+            <div className='subtitle'>Подборка 1</div>
+            <input type='text' 
+              className='form_input'
+              defaultValue={row?.selection1}
+              onChange={e => setRow({...row, selection1: e.target.value})} />
+          </div>
+          <div>
+            <div className='subtitle'>Подборка 2</div>
+              <input type='text' 
+              className='form_input'
+              defaultValue={row?.selection2}
+              onChange={e => setRow({...row, selection2 : e.target.value})} />
+          </div>
+          <div>
+            <div className='subtitle'>Изображение</div>
+            <input type='file'
+              className='form_input'
+              name='img'
+              onChange={e => onImgChangeHandler(e)}>
+            </input>
+          </div>
+            
           <div>
             {
             newImg
-            ? <img src={URL.createObjectURL(newImg)} alt={row?.img?.name} className='form_img'/>
-            : <img src={`/uploads/${row?.img}`} alt={row?.img?.name} className='form_img'/>   
-          }
+              ? <img src={URL.createObjectURL(newImg)} alt={row?.img?.name} className='form_img'/>
+              : <img src={`/uploads/${row?.img}`} alt={row?.img?.name} className='form_img'/>   
+            }
         </div>    
         </div>
-          
-          <div>
-          <button onClick={(e) => submitHandler(e)} className='form_btn'type='submit'>
+        <div>
+          <button onClick={submitHandler} className='form_btn' type='submit'>
             РЕДАКТИРОВАТЬ ТОВАР
           </button>
           </div>
-        
         </form> 
-    
   </div>
   )
 }

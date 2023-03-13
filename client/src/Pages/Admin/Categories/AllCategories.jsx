@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react'
+import React, {useEffect} from 'react'
 import Sidebar from '../Sidebar'
 import './Category.css'
 import axios from 'axios'
@@ -19,7 +19,6 @@ const AllCategories = () => {
 	const dispatch = useDispatch()
 	const categories = useSelector(state => state.categories.categories)
 	const subcategories = useSelector(state => state.subcategories.subcategories)
-	// const [subcategories, setSubcategories] = useState()
 
 
 	useEffect(() => {
@@ -52,31 +51,12 @@ const AllCategories = () => {
 
   }, [dispatch])
 
-  useEffect(() => {
-
-    console.log('categories', categories)
-    console.log('subcategories', subcategories)
-    //const result = categories.subcategories?.filter(it => subcategories.some(el => it === el._id))
-    
-
- 
-       //const result = subcategories.filter(it => categories.subcategories?.some(el => el === it._id))
-      //  console.log('result', result)
-    
-   
-  }, [categories])
-
-
-
-
-
-
 
   return (
 	<div className='category'>
 		<Sidebar />
 		
-		<div className='all_products' >
+		<div className='all_categories' >
 		   <Sidebar />
 		   <h2 className='admin_header'>Все Категории</h2>
 		   <TableContainer component={Paper} >
@@ -87,6 +67,8 @@ const AllCategories = () => {
 			      <TableCell sx={{fontWeight: 'bold'}} align="left">Изображение</TableCell>
             <TableCell sx={{fontWeight: 'bold'}} align="left">Категория</TableCell>
             <TableCell sx={{fontWeight: 'bold'}} align="left">Подкатегории</TableCell>
+            <TableCell sx={{fontWeight: 'bold'}} align="left">Подборка 1</TableCell>
+            <TableCell sx={{fontWeight: 'bold'}} align="left">Подборка 2</TableCell>
             <TableCell sx={{fontWeight: 'bold'}} align="left"></TableCell>
             <TableCell sx={{fontWeight: 'bold'}} align="left"></TableCell>
           </TableRow>
@@ -97,12 +79,14 @@ const AllCategories = () => {
               <TableCell align="left"> {index +1}</TableCell>
               <TableCell align="left"><img src={`/uploads/${row?.img}`} className='table_img' alt={row?.name}/></TableCell>
               <TableCell align="left">{row?.name}</TableCell>
-              <TableCell align="left">{row.subcategories.map(it => <div>
-                {it.name}
+              <TableCell align="left">{row?.subcategories.map(it => <div>
+                {it?.name}
               </div>)}</TableCell>
+              <TableCell align="left">{row?.selection1}</TableCell>
+               <TableCell align="left">{row?.selection2}</TableCell>
 			  <TableCell sx={{fontWeight: 'bold'}} align="left">
-			  <Link to={`/editProduct/${row?._id}`} className='admin_table_btn'
-				  // onClick={() => dispatch(getProduct(row._id))}
+			  <Link to={`/editCategory/${row?._id}`} className='admin_table_btn'
+				   //onClick={() => dispatch(getCategory(row._id))}
           >
 					<EditOutlined />
 				</Link>

@@ -1,6 +1,11 @@
 .category{
 	position: absolute;
 	width: 80%;
-	top: 70px;
-	right: 0%;
+	top: 100px;
+	left: 250px;
+
+}
+
+.all_categories{
+
 }

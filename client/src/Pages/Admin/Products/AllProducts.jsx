@@ -11,17 +11,16 @@ import Paper from '@mui/material/Paper';
 import {useSelector, useDispatch} from 'react-redux'
 import axios from 'axios'
 import { getAllProducts, deleteProduct, getProduct } from '../../../redux/ProductSlice';
-import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
-import EditIcon from '@mui/icons-material/Edit';
+import {EditOutlined, DeleteOutlined} from '@ant-design/icons';
+
 import {Link} from 'react-router-dom'
 import './AllProducts.css'
-import { products } from '../../../data';
 
 
 const AllProducts = () => {
 	
-	const dispatch = useDispatch()
-	const state_products = useSelector(state => state.products.products)
+  const dispatch = useDispatch()
+  const state_products = useSelector(state => state.products.products)
   const [products, setProducts] = useState()
   const categories = useSelector(state => state.categories.categories)
   const subcategories = useSelector(state => state.subcategories.subcategories)
@@ -39,7 +38,6 @@ const AllProducts = () => {
       }
   }
   request()
-
   }, [dispatch])
 
   useEffect(()=>{
@@ -48,8 +46,6 @@ const AllProducts = () => {
      }
 
   }, [state_products])
-
-
 
 
   return (
@@ -61,52 +57,52 @@ const AllProducts = () => {
       <Table sx={{ minWidth: 600}} aria-label="simple table">
         <TableHead>
           <TableRow>
-            <TableCell sx={{fontWeight: 'bold'}} className='tableCell' align="left">№</TableCell>
-			      <TableCell sx={{fontWeight: 'bold'}} className='tableCell' align="left">Изображение</TableCell>
-            <TableCell sx={{fontWeight: 'bold'}} className='tableCell' align="left">Наименование</TableCell>
-            <TableCell sx={{fontWeight: 'bold'}} className='tableCell' align="left">Описание</TableCell>
-            <TableCell sx={{fontWeight: 'bold'}} className='tableCell' align="left">Категория</TableCell>
-            <TableCell sx={{fontWeight: 'bold'}} className='tableCell' align="left">Подкатегория</TableCell>
-            <TableCell sx={{fontWeight: 'bold'}} className='tableCell' align="left">Тип</TableCell>
-			      <TableCell sx={{fontWeight: 'bold'}} className='tableCell' align="left">Цена</TableCell>
-            <TableCell sx={{fontWeight: 'bold'}} className='tableCell' align="left">Скидка</TableCell>
-			      <TableCell sx={{fontWeight: 'bold'}} className='tableCell' align="left">Размер</TableCell>
-            <TableCell sx={{fontWeight: 'bold'}} className='tableCell' align="left">Цвет</TableCell>
-            <TableCell sx={{fontWeight: 'bold'}} className='tableCell' align="left">В наличии</TableCell>
-            <TableCell sx={{fontWeight: 'bold'}} className='tableCell' align="left">Хит</TableCell>
-            <TableCell sx={{fontWeight: 'bold'}} className='tableCell' align="left"></TableCell>
-           
+            <TableCell sx={{fontWeight: 'bold', width: '10px'}} className='tableHead' align="left">№</TableCell>
+            <TableCell sx={{fontWeight: 'bold'}} className='tableHead' align="left">Изображение</TableCell>
+            <TableCell sx={{fontWeight: 'bold'}} className='tableHead' align="left">Наименование</TableCell>
+            <TableCell sx={{fontWeight: 'bold'}} className='tableHead' align="left">Описание</TableCell>
+            <TableCell sx={{fontWeight: 'bold'}} className='tableHead' align="left">Категория</TableCell>
+            <TableCell sx={{fontWeight: 'bold'}} className='tableHead' align="left">Подкатегория</TableCell>
+            <TableCell sx={{fontWeight: 'bold'}} className='tableHead' align="left">Цена</TableCell>
+            <TableCell sx={{fontWeight: 'bold'}} className='tableHead' align="left">Скидка</TableCell>
+            <TableCell sx={{fontWeight: 'bold'}} className='tableHead' align="left">Размер</TableCell>
+            <TableCell sx={{fontWeight: 'bold'}} className='tableHead' align="left">Цвет</TableCell>
+            <TableCell sx={{fontWeight: 'bold'}} className='tableHead' align="left">В наличии</TableCell>
+            <TableCell sx={{fontWeight: 'bold'}} className='tableHead' align="left">Хит</TableCell>
+            <TableCell sx={{fontWeight: 'bold'}} className='tableHead' align="left">Подборка1</TableCell>
+            <TableCell sx={{fontWeight: 'bold'}} className='tableHead' align="left">Подборка2 </TableCell>
+            <TableCell sx={{fontWeight: 'bold'}} className='tableHead' align="left"></TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
           {products?.map((row, index) => (
-            <TableRow
+            <TableRow 
+              className='tableRow'
               key={row?._id}
               sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
             >
-
-              {console.log('row', row)}
               <TableCell align="left" className='tableCell'>{index+1}</TableCell>
               <TableCell align="left" className='tableCell'>{row && row.img ? <img src={`/uploads/${row.img}`} className='table_img' alt={row.name}/> : ''} </TableCell>
               <TableCell align="left" className='tableCell'>{row?.name}</TableCell>
               <TableCell align="left" className='tableCell'>{row?.description}</TableCell>
               <TableCell align="left" className='tableCell'>{categories.find(it => it._id === row?.category)?.name}</TableCell>
-			        <TableCell align="left" className='tableCell'>{subcategories.find(it => it._id === row?.subcategory)?.subcategory}</TableCell>
-              <TableCell align="left" className='tableCell'>{row?.type}</TableCell>
+              <TableCell align="left" className='tableCell'>{subcategories.find(it => it._id === row?.subcategory)?.subcategory}</TableCell>
               <TableCell align="left" className='tableCell'>{row?.price}</TableCell>
               <TableCell align="left" className='tableCell'>{row?.discount}</TableCell>
               <TableCell align="left" className='tableCell'>{row?.size}</TableCell>
               <TableCell align="left" className='tableCell'>{row?.color}</TableCell>
               <TableCell align="left" className='tableCell'>{row?.inStock ? 'Да' : 'Нет'}</TableCell>
               <TableCell align="left" className='tableCell'>{row?.popular ? 'Да' : 'Нет'}</TableCell>
+               <TableCell align="left" className='tableCell'>{row?.selection1}</TableCell>
+                <TableCell align="left" className='tableCell'>{row?.selection2}</TableCell>
               <TableCell  className='lastCell' >
                 <Link to={`/editProduct/${row?._id}`} 
                     className='admin_table_btn'
-                    onClick={() => dispatch(getProduct(row?._id))}>
-                    <EditIcon fontSize='small' className='btns'/>
+                    onClick={() => dispatch(getProduct(row._id))}>
+                    <EditOutlined className='btns'/>
                 </Link>
                 <button className='admin_table_btn' onClick={() => dispatch(deleteProduct(row._id))}>
-                    <DeleteOutlineIcon fontSize='small' className='btns'/>
+                    <DeleteOutlined className='btns'/>
                 </button>
 			        </TableCell>
             </TableRow>

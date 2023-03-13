@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react'
+import React, { useEffect} from 'react'
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
@@ -12,6 +12,7 @@ import {getAllServices} from '../../../redux/ServiceSlice'
 import { Link } from 'react-router-dom';
 import s from './Service.module.css'
 import Sidebar from '../Sidebar';
+import {EditOutlined, DeleteOutlined} from '@ant-design/icons';
 
 
 const AllServices = () => {
@@ -79,14 +80,17 @@ const AllServices = () => {
               <TableCell align="left" className='tableCell'>{row?.address}</TableCell>
               <TableCell align="left" className='tableCell'>{row?.phone}</TableCell>
               <TableCell  className='lastCell' >
-                {/* <Link to={`/editProduct/${row._id}`} 
+                <Link to={`/editProduct/${row._id}`} 
                     className='admin_table_btn'
-                    onClick={() => dispatch(getProduct(row._id))}>
-                    <EditIcon fontSize='small' className='btns'/>
-                </Link> */}
-                {/* <button className='admin_table_btn' onClick={() => dispatch(deleteProduct(row._id))}>
-                    <DeleteOutlineIcon fontSize='small' className='btns'/>
-                </button> */}
+                    //onClick={() => dispatch(getProduct(row._id))}
+                    >
+                    <EditOutlined fontSize='small' className='btns'/>
+                </Link> 
+                <button className='admin_table_btn'
+                 //onClick={() => dispatch(deleteProduct(row._id))}
+                 >
+                    <DeleteOutlined fontSize='small' className='btns'/>
+                </button>
 			        </TableCell>
             </TableRow>
           ))}

@@ -1,8 +1,7 @@
-import React, {useState} from 'react'
+import React from 'react'
 import Header from '../../Components/Header/Header';
 import './ProductDetail.css'
 import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
-import { Carousel } from 'react-responsive-carousel';
 import './ProductDetail.css'
 import ImageGallery from 'react-image-gallery';
 import "react-image-gallery/styles/css/image-gallery.css";
@@ -18,11 +17,10 @@ const ProductDetail = ({props}) => {
 	const products = useSelector(state=> state.products.products)
 	const product = products.find(it => it._id === params.id)
 
-	   const images = [
+	const images = [
       {
         original: `/uploads/${product.img}`,
         thumbnail: `/uploads/${product.img}`,
-
       },
       {
         original: '/uploads/finiki.svg',
@@ -35,7 +33,6 @@ const ProductDetail = ({props}) => {
 	    {
         original: '/uploads/maksym.svg',
         thumbnail: '/uploads/maksym.svg',
-
       },
       {
         original: '/uploads/finiki.svg',
@@ -48,7 +45,6 @@ const ProductDetail = ({props}) => {
 	    {
         original: '/uploads/maksym.svg',
         thumbnail: '/uploads/maksym.svg',
-
       },
       {
         original: '/uploads/finiki.svg',
@@ -58,8 +54,7 @@ const ProductDetail = ({props}) => {
         original: '/uploads/chalap.svg',
         thumbnail: '/uploads/chalap.svg'
       }
-
-    ]
+]
 
   return (
 	<div className='product_detail_container'>
@@ -93,11 +88,7 @@ const ProductDetail = ({props}) => {
 						</div>
 						<div style={{marginTop: '40px'}}>
 							<Link to='/cart' className='product_detail_btn' style={{textDecoration: 'none', fontSize:'14px'}}>В корзинy</Link>
-						</div>
-					
-							
-					
-						
+						</div>			
 					</section>
 				</div>
 				<div className='product_detail_description'>
@@ -107,8 +98,6 @@ const ProductDetail = ({props}) => {
 					</div>
 				</div>
 			</div>
-			
-	        
 			<Footer />	
 	</div>
   )

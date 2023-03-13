@@ -15,6 +15,9 @@ import {
 import storage from 'redux-persist/lib/storage'
 import {combineReducers} from "redux";
 import serviceSlice from './ServiceSlice';
+import cartSlice from './CartSlice';
+import  orderSlice  from './OrderSlice';
+
 
 
 const persistConfig = {
@@ -28,6 +31,10 @@ const rootReducer = combineReducers({
 		categories: categorySlice,
 		subcategories: subcategorySlice,
         services: serviceSlice,
+        cart: cartSlice,
+        order: orderSlice
+
+   
 })
 
 const persistedReducer = persistReducer(persistConfig, rootReducer)

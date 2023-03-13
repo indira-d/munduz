@@ -1,0 +1,63 @@
+.orders{
+    position: absolute;
+    top: 70px;
+    left: 250px;
+}
+
+.order_row{
+    display: flex;
+}
+
+.order_row div{
+    padding: 5px;
+    border: 1px solid #dfdddd;
+    width: 70px;
+    border-collapse: collapse;
+}
+
+.tableCellTotal{
+    display: flex;
+    justify-content: space-between;
+    font-weight: bold;
+
+    width:450px;
+    padding: 10px;
+
+}
+
+.editOrder{
+    width: 80%;
+    position: absolute;
+    top: 70px;
+    left: 250px;
+}
+
+.orderInput{
+    padding: 10px ;
+    border: 1px solid rgb(218, 215, 215);
+    outline: none;
+    margin: -1px 0 0 -1px;
+ 
+
+
+}
+
+.order_subtitle{
+    font-size: 12px;
+    font-weight: 600;
+    margin-left: 20px;
+    color: rgb(28, 28, 28);
+}
+
+.order_row{
+ 
+   margin-left: 20px;
+}
+
+.order_total{
+    margin-left: 20px;
+    display: flex;
+    justify-content: space-between;
+    font-weight: 600;
+    margin-top: 10px;
+}

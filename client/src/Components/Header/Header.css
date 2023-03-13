@@ -93,6 +93,7 @@
 	justify-content: space-between;
 	margin: 10px 0;
 	font-size: 14px;
+	position: relative;
 }
 
 .search{
@@ -131,4 +132,20 @@
 	font-weight: 600;
 	transition: all 0.5s ease-in;
 text-shadow: 1px 2px 4px rgba(107,102,102,0.26);
+}
+
+.cart_info{
+	position: absolute;
+	background: #E21ECA;
+	color: white;
+	font-weight: 600;
+	width: 30px;
+	height: 30px;
+	border-radius: 50%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	top: -12px;
+	right: -5px;
+	
 }

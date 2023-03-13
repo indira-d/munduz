@@ -7,6 +7,7 @@ const productRoute = require('./routes/ProductRoute')
 const categoryRoute = require('./routes/CategoryRoute')
 const subcategoryRoute = require('./routes/SubcategoryRoute')
 const serviceRoute = require('./routes/ServiceRoute')
+const orderRoute = require('./routes/OrderRoute')
 
 
 const app = express()
@@ -24,6 +25,7 @@ app.use("/products", productRoute)
 app.use("/categories", categoryRoute)
 app.use("/subcategories", subcategoryRoute)
 app.use("/services", serviceRoute)
+app.use("/orders", orderRoute)
 
 app.listen(process.env.PORT , () => {
 	console.log(`Server is running on port ${process.env.PORT}`)

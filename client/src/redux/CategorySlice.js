@@ -10,7 +10,6 @@ const initialState = {
 export const addCategory = createAsyncThunk(
 	'categories/addCategory',
 	async (params) => {
-		console.log('params', params)
 		try {
 			const {data} = await publicRequest.post('/categories', params)
 			toast.success('Категория была добавлена')
@@ -44,23 +43,20 @@ export const getCategoryWithSubcategories = createAsyncThunk(
 	}
 )
 
-// export const updateProduct = createAsyncThunk(
-// 	'products/updateProduct',
-// 	async(updatedProduct) => {
-	
-// 		try {
-				
-// 			const {data} = await publicRequest.put(`/products/${updatedProduct._id}`, updatedProduct)
-// 			toast.success('Товар был обновлен')
-// 			console.log('updatedData', data)
-// 			return data
+export const updateCategory = createAsyncThunk(
+	'categories/updateCategory',
+	async(updatedCategory) => {
+		try {
+			const {data} = await publicRequest.put(`/categories/${updatedCategory.id}`, updatedCategory.updatedCategory)
+			toast.success('Категория была обновлена')
+			return data
 
-// 		} catch (error) {
-// 			console.log(error)
-// 			toast.error('error')
-// 		}
-// 	}
-// )
+		} catch (error) {
+			console.log(error)
+			toast.error('error')
+		}
+	}
+)
 
 export const deleteCategory = createAsyncThunk(
 	'categories/deleteCategory',
@@ -118,24 +114,19 @@ export const categorySlice = (createSlice({
 				state.loading = false
 			}) 
 		
-	 
-		
-		//UPDATE PRODUCT
+		//UPDATE CATEGORY
 
-			// .addCase(updateProduct.pending, state => {
-			// 	state.loading = true
-			// }) 
-			// .addCase(updateProduct.fulfilled, (state, action) => {
-
-			// 	console.log('action', action)
-			// 	state.loading = false
-			// 	const index = state.products.findIndex(it => it._id === action.payload._id)
-			// 	console.log()
-			// 	state.products[index] = action.payload
-			// }) 
-			// .addCase(updateProduct.rejected, state => {
-			// 	state.loading = false
-			// }) 
+			.addCase(updateCategory.pending, state => {
+				state.loading = true
+			}) 
+			.addCase(updateCategory.fulfilled, (state, action) => {
+				state.loading = false
+				const index = state.categories.findIndex(it => it._id === action.payload._id)
+				state.category[index] = action.payload
+			}) 
+			.addCase(updateCategory.rejected, state => {
+				state.loading = false
+			}) 
 	}
 }))
 

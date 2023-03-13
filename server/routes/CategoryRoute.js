@@ -1,7 +1,6 @@
 const express = require('express')
 const Category = require('../models/Category')
 const router = require('express').Router()
-
 const multer = require('multer')
 
 const storage = multer.diskStorage({
@@ -31,7 +30,6 @@ router.post('/', upload.single('img'), async(req, res) => {
 //GET ALL CATEGORIES
 
 router.get('/', async(req, res) => {
-
 	try {
 		let categories = await Category.find()
 		res.status(200).json(categories)
@@ -53,17 +51,30 @@ router.delete ('/:id', async(req, res) => {
 
 //UPDATE CATEGORY
 
-router.put('/:id', async (req, res) => {
-	try {
+router.put('/:id', upload.single('img'), async (req, res) => {
+	if(req.file){		
+		try {
+		const updatedCategory = await Category.findByIdAndUpdate(
+			req.params.id,
+			{$set: {...req.body, img: req.file.filename}},
+			{new: true}
+		)
+			res.status(200).json(updatedCategory)
+		} catch (error) {
+			res.status(500).json(error)
+		}
+
+	}else {
+		try {
 		const updatedCategory = await Category.findByIdAndUpdate(
 			req.params.id,
 			{$set: req.body},
 			{new: true}
 		)
-		res.status(200).json(updatedCategory)
-	} catch (error) {
-		res.status(500).json(error)
-	}
+			res.status(200).json(updatedCategory)
+		} catch (error) {
+			res.status(500).json(error)
+		}}
 })
 
 

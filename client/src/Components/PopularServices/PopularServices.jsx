@@ -1,7 +1,6 @@
 import React from 'react'
 import './PopularServices.css'
 import Carousel from 'better-react-carousel';
-import CarouselItem from '../CarouselItem/CarouselItem';
 import { useSelector } from 'react-redux';
 import ServiceItem from '../ServiceItem/ServiceItem';
 

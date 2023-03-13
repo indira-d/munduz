@@ -28,7 +28,7 @@ export default function Sidebar() {
         <Toolbar>
           <Typography variant="h6" noWrap component="div">
                <Link to='/' className='link'>
-                 <img src={'/client/public/uploads/logo.svg'} />
+                 <img src={'/uploads/logo.svg'} style={{height: '20px'}}/>
                </Link>
            
           </Typography>
@@ -46,6 +46,29 @@ export default function Sidebar() {
         <Box sx={{ overflow: 'auto', fontSize: 13, fontWeight: 600, letterSpacing: 0.5,paddingTop: '20px'}}>
        
           <List>
+              <ListItem key={'Все заказы'} disablePadding>
+                  <Link to='/allOrders' style={{textDecoration: 'none', color: 'rgba(0, 0, 0, 0.87)'}}>
+                      <ListItemButton>
+                          <ListItemIcon>
+                              { <ModeEditIcon/> }
+                          </ListItemIcon>
+                          <div>Все заказы</div>
+                      </ListItemButton>
+                  </Link>
+              </ListItem>
+
+              {/*<ListItem key={'Добавить товар'} disablePadding>*/}
+              {/*    <Link to='/addProduct' style={{textDecoration: 'none', color: 'rgba(0, 0, 0, 0.87)'}}>*/}
+              {/*        <ListItemButton>*/}
+              {/*            <ListItemIcon>*/}
+              {/*                { <ModeEditIcon/> }*/}
+              {/*            </ListItemIcon>*/}
+              {/*            <div>Добавить товар</div>*/}
+              {/*        </ListItemButton>*/}
+              {/*    </Link>*/}
+              {/*</ListItem>*/}
+          {/*</List>*/}
+            <Divider />
               <ListItem key={'Все товары'} disablePadding>
                 <Link to='/allProducts' style={{textDecoration: 'none', color: 'rgba(0, 0, 0, 0.87)'}}>
                   <ListItemButton>
@@ -77,6 +100,16 @@ export default function Sidebar() {
                       { <ModeEditIcon/> }
                     </ListItemIcon>
                     <div>Все категории</div>
+                  </ListItemButton>
+                </Link>    
+              </ListItem>
+              <ListItem key={'Все подкатегории'} disablePadding>
+                <Link to='/allSubcategories' style={{textDecoration: 'none', color: 'rgba(0, 0, 0, 0.87)'}}>
+                  <ListItemButton>
+                    <ListItemIcon>
+                      { <ModeEditIcon/> }
+                    </ListItemIcon>
+                    <div>Все подкатегории</div>
                   </ListItemButton>
                 </Link>    
               </ListItem>
