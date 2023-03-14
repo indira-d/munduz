@@ -8,7 +8,7 @@ import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import {useSelector, useDispatch} from 'react-redux'
 import axios from 'axios'
-import {getAllServices} from '../../../redux/ServiceSlice'
+import {deleteService, getAllServices, getService} from '../../../redux/ServiceSlice'
 import { Link } from 'react-router-dom';
 import s from './Service.module.css'
 import Sidebar from '../Sidebar';
@@ -41,8 +41,8 @@ const AllServices = () => {
 	<div className={s.all_services} >
 		   <Sidebar />
 		   <h2 className='admin_header'>Все услуги</h2>
-		   <TableContainer component={Paper} sx={{ margin: '50px 0px' }}>
-      <Table sx={{ minWidth: 600}} aria-label="simple table">
+		   <TableContainer component={Paper} sx={{ margin: '50px 0px', width: '80%' }}>
+      <Table aria-label="simple table">
         <TableHead>
           <TableRow>
             <TableCell sx={{fontWeight: 'bold'}} className='tableCell' align="left">№</TableCell>
@@ -57,6 +57,8 @@ const AllServices = () => {
 			      <TableCell sx={{fontWeight: 'bold'}} className='tableCell' align="left">Автор</TableCell>
             <TableCell sx={{fontWeight: 'bold'}} className='tableCell' align="left">Адрес</TableCell>
             <TableCell sx={{fontWeight: 'bold'}} className='tableCell' align="left">Телефон</TableCell>
+            <TableCell sx={{fontWeight: 'bold'}} className='tableCell' align="left">Хит</TableCell>
+            <TableCell sx={{fontWeight: 'bold'}} className='tableCell' align="left">Подборка</TableCell>
             <TableCell sx={{fontWeight: 'bold'}} className='tableCell' align="left"></TableCell>
            
           </TableRow>
@@ -79,15 +81,17 @@ const AllServices = () => {
               <TableCell align="left" className='tableCell'>{row?.author}</TableCell>
               <TableCell align="left" className='tableCell'>{row?.address}</TableCell>
               <TableCell align="left" className='tableCell'>{row?.phone}</TableCell>
+              <TableCell align="left" className='tableCell'>{row?.popular}</TableCell>
+              <TableCell align="left" className='tableCell'>{row?.selection}</TableCell>
               <TableCell  className='lastCell' >
-                <Link to={`/editProduct/${row._id}`} 
+                <Link to={`/editService/${row._id}`} 
                     className='admin_table_btn'
-                    //onClick={() => dispatch(getProduct(row._id))}
+                    onClick={() => dispatch(getService(row._id))}
                     >
                     <EditOutlined fontSize='small' className='btns'/>
                 </Link> 
                 <button className='admin_table_btn'
-                 //onClick={() => dispatch(deleteProduct(row._id))}
+                 onClick={() => dispatch(deleteService(row._id))}
                  >
                     <DeleteOutlined fontSize='small' className='btns'/>
                 </button>

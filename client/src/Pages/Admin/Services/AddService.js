@@ -19,20 +19,19 @@ const AddService = () => {
    const [phone, setPhone] = useState()
    const [price, setPrice] = useState()
    const [discount, setDiscount] = useState(0)
+   const [selection, setSelection] = useState('')
+   const [isPopular, setIsPopular] = useState(false)
    const categories = useSelector(state => state.categories.categories)
    const dispatch = useDispatch() 
 
-
- 
    const submitHandler = (e) => {
       e.preventDefault()
     try {
   
-
         const data = {
                       name, 
                       img: img.name, 
-					  avatar: avatar.name,
+					            avatar: avatar.name,
                       description, 
                       category, 
                       subcategory,
@@ -66,108 +65,126 @@ const AddService = () => {
         </div>
         <Sidebar />
         <form onSubmit={e => e.preventDefault()} encType="multipart/form-data" className='form'>
-       <div>
-        <input
-          required
-          className='form_input'
-          id="name"
-          label="Наименование"
-          placeholder='Наименование'
-          onChange={e => setName(e.target.value)}
-        />
-        <input
-          className='form_input'
-          id="description"
-          label="Описание"
-          placeholder='Описание'
-          onChange={e => setDescription(e.target.value)}
-        />
-       
-        <Select
-          className={'select'}
-          placeholder='Категория'
-          id='category'
-          size='large'
-          onChange = { value => onCategoryChangeHandler(value)}
-          options={categories?.map(it => ({value: it._id, label: it.name}))}
-        />
-        <Select
-          placeholder='Подкатегория'
-          className={'select'}
-          id='subcategory'
-          size='large'
-          onChange={value => setSubcategory(subcategories.find(it => it._id === value))}
-          options={subcategories?.map(el => ({value: el._id, label: el.name}))}
-        />
-
-        <input type='number' 
-          required
-          className='form_input'
-          placeholder='Цена'
-          id="price"
-          onChange={e => setPrice(Number(e.target.value))} />
-
-        <input
-          required
-          className='form_input'
-          id="author"
-          label="Автор"
-          placeholder='Автор'
-          onChange={e => setAuthor(e.target.value)}
-        />
-          
-        <input type='text' 
-          className='form_input'
-          placeholder='Aдрес'
-          id="adress"
-          onChange={e => setAddress(e.target.value)} />
-
-          <input type='text' 
-            className='form_input'
-            placeholder='Телефон'
-            id="phone"
-            defaultValue={''}
-            onChange={e => setPhone(e.target.value)} />
-          
-          <input type='number' 
-            className='form_input'
-            placeholder='Скидка'
-            id="discount"
-            defaultValue={'0'}
-            onChange={e => setDiscount(Number(e.target.value))} />
-          
-
-      <div>
-        <input type='file' 
-          filename='img' 
-          className='form_input'
-          id='img'
-          onChange={e => setImg(e.target.files[0])}>
-        </input>
-        
-            {img && <img src={URL.createObjectURL(img)} alt={img.name} className='form_img'/> }
-        </div>
-		 <div>
-		<input type='file' 
-          filename='avatar' 
-          className='form_input'
-          id='avatar'
-          onChange={e => setAvatar(e.target.files[0])}>
-        </input>
-       
-            {avatar && <img src={URL.createObjectURL(avatar)} alt={avatar.name} className='form_img'/> }
-        </div>
-        
-        </div>  
-          <div>
-          <button onClick={(e) => submitHandler(e)} className='form_btn'type='submit'>
-            ДОБАВИТЬ УСЛУГУ
-          </button>
-          </div>
-        
+            <div style={{display: 'flex', flexWrap: 'wrap', marginTop: '20px'}}>
+                <div>
+                    <div className='subtitle'>Наименование</div>
+                    <input
+                    required
+                    className='form_input'
+                    onChange={e => setName(e.target.value)}
+                    />
+                </div>
+                <div>
+                    <div className='subtitle'>Описание</div>
+                    <input
+                    className='form_input'
+                    onChange={e => setDescription(e.target.value)}
+                    />
+                </div>
+                <div>
+                    <div className='subtitle'>Категория</div>
+                    <Select
+                        className={'select'}
+                        size='large'
+                        onChange = { value => onCategoryChangeHandler(value)}
+                        options={categories?.map(it => ({value: it._id, label: it.name}))}
+                    />
+                </div>
+                <div>
+                    <div className='subtitle'>Подкатегория</div>
+                    <Select
+                        className={'select'}
+                        size='large'
+                        onChange={value => setSubcategory(subcategories.find(it => it._id === value))}
+                        options={subcategories?.map(el => ({value: el._id, label: el.name}))}
+                    />
+                </div>
+                <div>
+                    <div className='subtitle'>Цена</div>
+                    <input type='number' 
+                    required
+                    className='form_input'
+                    onChange={e => setPrice(Number(e.target.value))} />
+                </div>
+                <div>
+                    <div className='subtitle'>Автор</div>
+                    <input
+                        required
+                        className='form_input'
+                        onChange={e => setAuthor(e.target.value)}
+                    />
+                </div>
+                <div>
+                    <div className='subtitle'>Aдрес</div>
+                    <input type='text' 
+                    className='form_input'
+                    onChange={e => setAddress(e.target.value)} />
+                </div>
+                <div>
+                    <div className='subtitle'>Телефон</div>
+                    <input type='text' 
+                    className='form_input'
+                    defaultValue={''}
+                    onChange={e => setPhone(e.target.value)} />
+                </div>
+                <div>
+                    <div className='subtitle'>Скидка</div>
+                    <input type='number' 
+                        className='form_input'
+                        placeholder='Скидка'
+                        id="discount"
+                        defaultValue={'0'}
+                        onChange={e => setDiscount(Number(e.target.value))} />
+                </div>
+                <div>
+                    <div className='subtitle'>Хит</div>
+                    <Select
+                        className={'select'}
+                        size='large'
+                        value={isPopular}
+                        onChange={value => setIsPopular(value)}
+                        options={[{value: true, label: 'Хит'}, {value: false, label: 'Нет'}]}
+                    />
+                </div>
+                <div>
+                    <div className='subtitle'>Подборка</div>
+                    <input type='text' 
+                        className='form_input'
+                        defaultValue={selection}
+                        onChange={e => setSelection(e.target.value)}/>
+                </div>
+                <div>
+                    <div className='subtitle'>Изображение</div>
+                    <input type='file' 
+                        filename='img' 
+                        className='form_input'
+                        id='img'
+                        onChange={e => setImg(e.target.files[0])}>
+                    </input>
+                </div>
+                <div>
+                    {img && <img src={URL.createObjectURL(img)} alt={img.name} className='form_img'/> }
+                </div>
+                <div>
+                    <div className='subtitle'>avatar</div>
+                    <input type='file' 
+                        filename='avatar' 
+                        className='form_input'
+                        id='avatar'
+                        onChange={e => setAvatar(e.target.files[0])}></input>
+                </div>
+                <div>
+                    {avatar && <img src={URL.createObjectURL(avatar)} alt={avatar.name} className='form_img'/> }
+                </div>
+                <div>
+                    <button onClick={(e) => submitHandler(e)} className='form_btn'type='submit'>
+                        ДОБАВИТЬ УСЛУГУ
+                    </button>
+                </div>
+            </div>
         </form> 
-	  </div>
 	</div>
+  </div>
   )
 }
 

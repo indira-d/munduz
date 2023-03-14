@@ -18,7 +18,9 @@ const ServiceSchema = new mongoose.Schema(
 		price: {type: Number, required: [true, 'Укажите цену услуги']},
 		discount: {type: Number},
 		address: {type: String},
-		phone: {type: String}
+		phone: {type: String},
+		popular: {type: Boolean},
+		selection: {type: String}
 },
 {
 	timestamps: true

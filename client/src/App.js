@@ -49,6 +49,7 @@ function App() {
             <Route path="/cart" element={<Cart/>} />
             <Route path="/allOrders" element={<AllOrders/>} />
             <Route path="/editOrder/:id" element={<EditOrder/>} />
+            <Route path="/editService/:id" element={<EditService/>} />
        </Routes>
         <ToastContainer
             position="top-right"
